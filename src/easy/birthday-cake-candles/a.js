@@ -1,4 +1,9 @@
-//
+
+/*
+https://www.hackerrank.com/challenges/birthday-cake-candles/problem
+
+Birthday Cake Candles
+*/
 
 /* eslint-disable no-plusplus */
 

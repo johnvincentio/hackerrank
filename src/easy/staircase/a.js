@@ -1,4 +1,9 @@
-//
+
+/*
+https://www.hackerrank.com/challenges/staircase/problem
+
+Staircase
+*/
 
 /* eslint-disable no-plusplus */
 

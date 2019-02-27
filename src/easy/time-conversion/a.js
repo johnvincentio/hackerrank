@@ -1,4 +1,9 @@
-//
+
+/*
+https://www.hackerrank.com/challenges/time-conversion/problem
+
+Time Conversion
+*/
 
 /* eslint-disable no-plusplus */
 

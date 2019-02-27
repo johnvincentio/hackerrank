@@ -1,4 +1,9 @@
-//
+
+/*
+https://www.hackerrank.com/challenges/mini-max-sum/problem
+
+Mini-Max Sum
+*/
 
 /* eslint-disable no-plusplus */
 
