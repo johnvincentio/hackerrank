@@ -13,12 +13,27 @@ let inputString = '';
 let currentLine = 0;
 
 function readLine() {
-	console.error('inputString[currentLine] ', inputString[currentLine]);
+	// console.error('inputString[currentLine] ', inputString[currentLine]);
 	return inputString[currentLine++];
 }
 
 function minimumDistances(a) {
-
+	let minimum = -1;		// no match
+	for (let i = 0; i < a.length; i++) {
+		// console.error('current ', a[i]);
+		for (let j = i + 1; j < a.length; j++) {
+			// console.error('next ', a[j]);
+			if (a[i] === a[j]) {
+				const distance = j - i;
+				// console.error('distance ', distance);
+				if (minimum === -1 || distance < minimum) {
+					minimum = distance;
+				}
+			}
+		}
+	}
+	// console.error('a ', a);
+	return minimum;
 }
 
 convert.main = function main(input) {
