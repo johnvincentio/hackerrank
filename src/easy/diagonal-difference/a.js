@@ -1,4 +1,9 @@
-//
+
+/*
+https://www.hackerrank.com/challenges/diagonal-difference/problem
+
+Diagonal Difference
+*/
 
 /* eslint-disable no-plusplus */
 
