@@ -1,8 +1,8 @@
 
 /*
-https://www.hackerrank.com/challenges/mini-max-sum/problem
+https://www.hackerrank.com/challenges/minimum-distances/problem
 
-Mini-Max Sum
+Minimum Distances
 */
 
 /* eslint-disable no-plusplus */
@@ -17,10 +17,7 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-
-// Complete the minimumDistances function below.
 function minimumDistances(a) {
-
 
 }
 
@@ -37,3 +34,5 @@ convert.main = function main(input) {
 	console.log(`result ${result}\n`);
 	return result;
 }
+
+module.exports = convert;
