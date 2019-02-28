@@ -7,6 +7,8 @@ Queens Attack 2
 
 /* eslint-disable no-plusplus */
 
+/* eslint-disable no-param-reassign */
+
 let inputString = '';
 let currentLine = 0;
 
@@ -197,28 +199,29 @@ function queensAttack(n, k, row, col, appObstacles) {
 	return total;
 }
 
-function calculateObstacles(appObstacles, row, col, obstacleRow, obstacleCol) {
+function calculateObstacles(obstacles, row, col, obstacleRow, obstacleCol) {
 	if (col === obstacleCol) {
 		if (row < obstacleRow) {
 			const distance = obstacleRow - row;
-			if (appObstacles['0'].distance === undefined || distance < appObstacles['0'].distance) {
-				appObstacles['0'].distance = distance;
-				appObstacles['0'].row = obstacleRow;
-				appObstacles['0'].col = obstacleCol;
+			if (obstacles.N === null || distance < obstacles.N) {
+				obstacles.N = distance;
 			}
 		}
 		else if (row > obstacleRow) {
 			const distance = row - obstacleRow;
-			if (appObstacles['4'].distance === undefined || distance < appObstacles['4'].distance) {
-				appObstacles['4'].distance = distance;
-				appObstacles['4'].row = obstacleRow;
-				appObstacles['4'].col = obstacleCol;
+			if (obstacles.S === null || distance < obstacles.S) {
+				obstacles.S = distance;
 			}
 		}
 	}
 	// console.error('calculateObstacles::appObstacles ', appObstacles);
 }
 
+function setup() {
+	return {
+		'N': null, 'NE': null, 'E': null, 'SE': null, 'S': null, 'SW': null, 'W': null, 'NW': null
+	};
+}
 function main(input) {
 	currentLine = 0;
 	inputString = input;
@@ -230,19 +233,17 @@ function main(input) {
 	const rQ = parseInt(rqCq[0], 10);
 	const cQ = parseInt(rqCq[1], 10);
 
-	const appObstacles = {
-		'0': {}, '1': {}, '2': {}, '3': {}, '4': {}, '5': {}, '6': {}, '7': {}
-	};
-	console.error('(1) appObstacles ', appObstacles);
+	const obstacles = setup();
+	console.error('(1) obstacles ', obstacles);
 
 	for (let i = 0; i < k; i++) {
 		const obstacle = readLine().split(' ').map(obstaclesTemp => parseInt(obstaclesTemp, 10));
-		calculateObstacles(appObstacles, rQ, cQ, obstacle[0], obstacle[1]);
+		calculateObstacles(obstacles, rQ, cQ, obstacle[0], obstacle[1]);
 	}
-	console.error('appObstacles ', appObstacles);
+	console.error('obstacles ', obstacles);
 
 	console.error(' before queensAttack');
-	const result = queensAttack(n, k, rQ, cQ, appObstacles);
+	const result = queensAttack(n, k, rQ, cQ, obstacles);
 
 	console.log(`result ${result}\n`);
 	return result;
@@ -258,5 +259,6 @@ module.exports = {
 	downLeftDiagonal,
 	upRightDiagonal,
 	downRightDiagonal,
-	calculateObstacles
+	calculateObstacles,
+	setup
 };

@@ -5,60 +5,44 @@ const should = require('chai').should();
 
 const a = require('../a');
 
-let appObstacles = {};
+let obstacles = {};
 
-describe('calculateObstacles 0', () => {
+describe.only('calculateObstacles N', () => {
 	beforeEach(() => {
-		appObstacles = {
-			'0': {}, '1': {}, '2': {}, '3': {}, '4': {}, '5': {}, '6': {}, '7': {}
-		};
+		obstacles = a.setup();
 	});
 
 	it('1', () => {
-		a.calculateObstacles(appObstacles, 2, 3, 3, 3);
-		appObstacles['0'].distance.should.equal(1);
-		appObstacles['0'].row.should.equal(3);
-		appObstacles['0'].col.should.equal(3);
+		a.calculateObstacles(obstacles, 2, 3, 3, 3);
+		obstacles.N.should.equal(1);
 	});
 	it('2', () => {
-		a.calculateObstacles(appObstacles, 2, 3, 5, 3);
-		appObstacles['0'].distance.should.equal(3);
-		appObstacles['0'].row.should.equal(5);
-		appObstacles['0'].col.should.equal(3);
+		a.calculateObstacles(obstacles, 2, 3, 5, 3);
+		obstacles.N.should.equal(3);
 	});
 	it('3', () => {
-		a.calculateObstacles(appObstacles, 2, 3, 5, 3);
-		a.calculateObstacles(appObstacles, 2, 3, 3, 3);
-		appObstacles['0'].distance.should.equal(1);
-		appObstacles['0'].row.should.equal(3);
-		appObstacles['0'].col.should.equal(3);
+		a.calculateObstacles(obstacles, 2, 3, 5, 3);
+		a.calculateObstacles(obstacles, 2, 3, 3, 3);
+		obstacles.N.should.equal(1);
 	});
 });
 
-describe.only('calculateObstacles 4', () => {
+describe.only('calculateObstacles S', () => {
 	beforeEach(() => {
-		appObstacles = {
-			'0': {}, '1': {}, '2': {}, '3': {}, '4': {}, '5': {}, '6': {}, '7': {}
-		};
+		obstacles = a.setup();
 	});
 
 	it('1', () => {
-		a.calculateObstacles(appObstacles, 4, 3, 3, 3);
-		appObstacles['4'].distance.should.equal(1);
-		appObstacles['4'].row.should.equal(3);
-		appObstacles['4'].col.should.equal(3);
+		a.calculateObstacles(obstacles, 4, 3, 3, 3);
+		obstacles.S.should.equal(1);
 	});
 	it('2', () => {
-		a.calculateObstacles(appObstacles, 4, 3, 2, 3);
-		appObstacles['4'].distance.should.equal(2);
-		appObstacles['4'].row.should.equal(2);
-		appObstacles['4'].col.should.equal(3);
+		a.calculateObstacles(obstacles, 4, 3, 2, 3);
+		obstacles.S.should.equal(2);
 	});
 	it('3', () => {
-		a.calculateObstacles(appObstacles, 4, 3, 1, 3);
-		a.calculateObstacles(appObstacles, 4, 3, 2, 3);
-		appObstacles['4'].distance.should.equal(2);
-		appObstacles['4'].row.should.equal(2);
-		appObstacles['4'].col.should.equal(3);
+		a.calculateObstacles(obstacles, 4, 3, 1, 3);
+		a.calculateObstacles(obstacles, 4, 3, 2, 3);
+		obstacles.S.should.equal(2);
 	});
 });
