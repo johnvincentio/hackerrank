@@ -11,7 +11,7 @@ let inputString = '';
 let currentLine = 0;
 
 function readLine() {
-	console.error('inputString[currentLine] ', inputString[currentLine]);
+	// console.error('inputString[currentLine] ', inputString[currentLine]);
 	return inputString[currentLine++];
 }
 
@@ -172,28 +172,51 @@ function createBoard(n, obstacles) {
 	return board;
 }
 
-function queensAttack(n, k, row, col, obstacles) {
-	console.error('n ', n, ' k ', k, ' row ', row, ' col ', col, ' obstacles ', obstacles);
+function queensAttack(n, k, row, col, appObstacles) {
+	// console.error('n ', n, ' k ', k, ' row ', row, ' col ', col, ' obstacles ', obstacles);
 
-	const board = createBoard(n, obstacles);
+	// const board = createBoard(n, obstacles);
+	// const board = createBoard(0, []);
 
-	const horizLeft = leftHorizontal(n, row, col, board);
-	const horizRight = rightHorizontal(n, row, col, board);
+	const horizLeft = leftHorizontal(n, row, col, appObstacles);
+	const horizRight = rightHorizontal(n, row, col, appObstacles);
 
-	const verticalUp = upVertical(n, row, col, board);
-	const verticalDown = downVertical(n, row, col, board);
+	const verticalUp = upVertical(n, row, col, appObstacles);
+	const verticalDown = downVertical(n, row, col, appObstacles);
 
-	const leftDiagonalUp = upLeftDiagonal(n, row, col, board);
-	const leftDiagonalDown = downLeftDiagonal(n, row, col, board);
+	const leftDiagonalUp = upLeftDiagonal(n, row, col, appObstacles);
+	const leftDiagonalDown = downLeftDiagonal(n, row, col, appObstacles);
 
-	const rightDiagonalUp = upRightDiagonal(n, row, col, board);
-	const rightDiagonalDown = downRightDiagonal(n, row, col, board);
+	const rightDiagonalUp = upRightDiagonal(n, row, col, appObstacles);
+	const rightDiagonalDown = downRightDiagonal(n, row, col, appObstacles);
 
 	const total = horizLeft + horizRight + verticalUp + verticalDown +
 		leftDiagonalUp + leftDiagonalDown + rightDiagonalUp + rightDiagonalDown;
 
 	console.error('total ', total);
 	return total;
+}
+
+function calculateObstacles(appObstacles, row, col, obstacleRow, obstacleCol) {
+	if (col === obstacleCol) {
+		if (row < obstacleRow) {
+			const distance = obstacleRow - row;
+			if (appObstacles['0'].distance === undefined || distance < appObstacles['0'].distance) {
+				appObstacles['0'].distance = distance;
+				appObstacles['0'].row = obstacleRow;
+				appObstacles['0'].col = obstacleCol;
+			}
+		}
+		else if (row > obstacleRow) {
+			const distance = row - obstacleRow;
+			if (appObstacles['4'].distance === undefined || distance < appObstacles['4'].distance) {
+				appObstacles['4'].distance = distance;
+				appObstacles['4'].row = obstacleRow;
+				appObstacles['4'].col = obstacleCol;
+			}
+		}
+	}
+	// console.error('calculateObstacles::appObstacles ', appObstacles);
 }
 
 function main(input) {
@@ -207,12 +230,19 @@ function main(input) {
 	const rQ = parseInt(rqCq[0], 10);
 	const cQ = parseInt(rqCq[1], 10);
 
-	const obstacles = Array(k);
-	for (let i = 0; i < k; i++) {
-		obstacles[i] = readLine().split(' ').map(obstaclesTemp => parseInt(obstaclesTemp, 10));
-	}
+	const appObstacles = {
+		'0': {}, '1': {}, '2': {}, '3': {}, '4': {}, '5': {}, '6': {}, '7': {}
+	};
+	console.error('(1) appObstacles ', appObstacles);
 
-	const result = queensAttack(n, k, rQ, cQ, obstacles);
+	for (let i = 0; i < k; i++) {
+		const obstacle = readLine().split(' ').map(obstaclesTemp => parseInt(obstaclesTemp, 10));
+		calculateObstacles(appObstacles, rQ, cQ, obstacle[0], obstacle[1]);
+	}
+	console.error('appObstacles ', appObstacles);
+
+	console.error(' before queensAttack');
+	const result = queensAttack(n, k, rQ, cQ, appObstacles);
 
 	console.log(`result ${result}\n`);
 	return result;
@@ -228,6 +258,5 @@ module.exports = {
 	downLeftDiagonal,
 	upRightDiagonal,
 	downRightDiagonal,
-	createBoard
+	calculateObstacles
 };
-
