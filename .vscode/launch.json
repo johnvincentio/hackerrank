@@ -11,13 +11,13 @@
 			"program": "${workspaceFolder}/index.js"
 		},
 		{
-			"name": "halloween sale",
+			"name": "service lane",
 			"type": "node",
 			"request": "launch",
 			"program": "${workspaceRoot}/src/node_modules/mocha/bin/_mocha",
 			"stopOnEntry": false,
 			"args": [
-				"src/easy/halloween-sale/test/**/*.js",
+				"src/easy/service-lane/test/**/*.js",
 				"--no-timeouts"
 			],
 			"cwd": "${workspaceRoot}",
