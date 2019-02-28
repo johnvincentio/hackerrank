@@ -15,7 +15,7 @@ describe('test', () => {
 		result.should.equal(9);
 	});
 
-	it.only('2', () => {
+	it('2', () => {
 		const input = [
 			'5 3',
 			'4 3',
