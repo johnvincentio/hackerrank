@@ -17,71 +17,153 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-function queensAttack(n, k, rQ, cQ, obstacles) {
-	console.error('n ', n, ' k ', k, ' rQ ', rQ, ' cQ ', cQ, ' obstacles ', obstacles);
+function isObstacle(row, col, obstacles) {
+	console.error('isObstacle; row ', row, ' col ', col);
+	let result = false;
+	for (let i = 0; i < obstacles.length; i++) {
+		console.error('i ', i, ' obstacle ', obstacles[i]);
+	}
+	return result;
+}
 
-	// horizontals
-
+function leftHorizontal(n, row, col, obstacles) {
 	let total = 0;
-	for (let i = rQ - 1; i > 0; i--) {		// left
+	for (let i = row, j = col - 1; j > 0; j--) {
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
 	}
-	console.error('(1a) total ', total);
-	for (let i = rQ + 1; i <= n; i++) {		// right
+	console.error('leftHorizontal total ', total);
+	return total;
+}
+
+function rightHorizontal(n, row, col, obstacles) {
+	let total = 0;
+	for (let i = row, j = col + 1; j <= n; j++) {
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
 	}
-	console.error('(1b) total ', total);
+	console.error('rightHorizontal total ', total);
+	return total;
+}
 
-	// verticals
-
-	for (let i = cQ - 1; i > 0; i--) {		// down
+function upVertical(n, row, col, obstacles) {
+	let total = 0;
+	for (let i = row + 1, j = col; i <= n; i++) {
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
 	}
-	console.error('(2a) total ', total);
-	for (let i = cQ + 1; i <= n; i++) {		// up
+	console.error('upVertical total ', total);
+	return total;
+}
+
+function downVertical(n, row, col, obstacles) {
+	let total = 0;
+
+	for (let i = row - 1, j = col; i > 0; i--) {		// left
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
 	}
-	console.error('(2b) total ', total);
+	console.error('downVertical total ', total);
+	return total;
+}
 
-	// diagonal left
+function upRightDiagonal(n, row, col, obstacles) {
+	let total = 0;
 
-	let i1 = rQ - 1;
-	let j1 = cQ - 1;
-	for (; i1 > 0 && j1 > 0;) {			// down
+	let i = row + 1;
+	let j = col + 1;
+	for (; i < n && j < n;) {
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
-		i1--;
-		j1--;
+		i++;
+		j++;
 	}
-	console.error('(3a) total ', total);
+	console.error('upRightDiagonal total ', total);
+	return total;
+}
 
-	let i2 = rQ + 1;
-	let j2 = cQ + 1;
-	for (; i2 < n && j2 < n;) {			// up
+function downRightDiagonal(n, row, col, obstacles) {
+	let total = 0;
+
+	let i = row - 1;
+	let j = col - 1;
+	for (; i > 0 && j > 0;) {			// down
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
-		i2++;
-		j2++;
+		i--;
+		j--;
 	}
-	console.error('(3b) total ', total);
+	console.error('downRightDiagonal total ', total);
+	return total;
+}
 
-	// diagonal right
+function upLeftDiagonal(n, row, col, obstacles) {
+	let total = 0;
 
-	let i3 = rQ + 1;
-	let j3 = cQ - 1;
-	for (; i3 < n && j3 > 0;) {		// down
+	let i = row + 1;
+	let j = col - 1;
+	for (; i < n && j > 0;) {		// down
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
-		i3++;
-		j3--;
+		i++;
+		j--;
 	}
-	console.error('(4a) total ', total);
+	console.error('upLeftDiagonal total ', total);
+	return total;
+}
 
-	let i4 = rQ + 1;
-	let j4 = cQ - 1;
-	for (; i4 < n && j4 > 0;) {
+function downLeftDiagonal(n, row, col, obstacles) {
+	let total = 0;
+
+	let i = row + 1;
+	let j = col - 1;
+	for (; i < n && j > 0;) {
+		if (isObstacle(i, j, obstacles)) {
+			break;
+		}
 		total++;
-		i4++;
-		j4--;
+		i++;
+		j--;
 	}
-	console.error('(4b) total ', total);
+	console.error('downLeftDiagonal total ', total);
+	return total;
+}
+
+function queensAttack(n, k, row, col, obstacles) {
+	console.error('n ', n, ' k ', k, ' row ', row, ' col ', col, ' obstacles ', obstacles);
+
+	const horizLeft = leftHorizontal(n, row, col, obstacles);
+	const horizRight = rightHorizontal(n, row, col, obstacles);
+	console.error('horizLeft ', horizLeft, ' horizRight ', horizRight);
+
+	const verticalUp = upVertical(n, row, col, obstacles);
+	const verticalDown = downVertical(n, row, col, obstacles);
+	console.error('verticalUp ', verticalUp, ' verticalDown ', verticalDown);
+
+	const leftDiagonalUp = upLeftDiagonal(n, row, col, obstacles);
+	const leftDiagonalDown = downLeftDiagonal(n, row, col, obstacles);
+	console.error('leftDiagonalUp ', leftDiagonalUp, ' leftDiagonalDown ', leftDiagonalDown);
+
+	const rightDiagonalUp = upRightDiagonal(n, row, col, obstacles);
+	const rightDiagonalDown = downRightDiagonal(n, row, col, obstacles);
+	console.error('rightDiagonalUp ', rightDiagonalUp, ' rightDiagonalDown ', rightDiagonalDown);
+
+	const total = horizLeft + horizRight + verticalUp + verticalDown +
+		leftDiagonalUp + leftDiagonalDown + rightDiagonalUp + rightDiagonalDown;
 
 	console.error('total ', total);
 	return total;
