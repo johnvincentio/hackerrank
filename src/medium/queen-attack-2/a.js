@@ -15,30 +15,30 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-function isObstacleOLD(row, col, obstacles) {
-	// console.error('isObstacle; row ', row, ' col ', col);
-	for (let i = 0; i < obstacles.length; i++) {
-		// console.error('i ', i, ' obstacle ', obstacles[i]);
-		if (obstacles[i][0] === row && obstacles[i][1] === col) {
-			return true;
-		}
-	}
-	return false;
-}
+// function isObstacleOLD(row, col, obstacles) {
+// 	// console.error('isObstacle; row ', row, ' col ', col);
+// 	for (let i = 0; i < obstacles.length; i++) {
+// 		// console.error('i ', i, ' obstacle ', obstacles[i]);
+// 		if (obstacles[i][0] === row && obstacles[i][1] === col) {
+// 			return true;
+// 		}
+// 	}
+// 	return false;
+// }
 
-function isObstacle(row, col, obstacles) {
-	// console.error('isObstacle; row ', row, ' col ', col);
-	const idx = obstacles.findIndex(item => {
-		return item[0] === row && item[1] === col;
-	});
-	// console.error('idx ', idx);
-	return idx > -1;
-}
+// function isObstacle(row, col, obstacles) {
+// 	// console.error('isObstacle; row ', row, ' col ', col);
+// 	const idx = obstacles.findIndex(item => {
+// 		return item[0] === row && item[1] === col;
+// 	});
+// 	// console.error('idx ', idx);
+// 	return idx > -1;
+// }
 
-function leftHorizontal(n, row, col, obstacles) {
+function leftHorizontal(n, row, col, board) {
 	let total = 0;
 	for (let i = row, j = col - 1; j > 0; j--) {
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -47,10 +47,10 @@ function leftHorizontal(n, row, col, obstacles) {
 	return total;
 }
 
-function rightHorizontal(n, row, col, obstacles) {
+function rightHorizontal(n, row, col, board) {
 	let total = 0;
 	for (let i = row, j = col + 1; j <= n; j++) {
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -59,10 +59,10 @@ function rightHorizontal(n, row, col, obstacles) {
 	return total;
 }
 
-function upVertical(n, row, col, obstacles) {
+function upVertical(n, row, col, board) {
 	let total = 0;
 	for (let i = row + 1, j = col; i <= n; i++) {
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -71,11 +71,11 @@ function upVertical(n, row, col, obstacles) {
 	return total;
 }
 
-function downVertical(n, row, col, obstacles) {
+function downVertical(n, row, col, board) {
 	let total = 0;
 
 	for (let i = row - 1, j = col; i > 0; i--) {		// left
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -84,13 +84,13 @@ function downVertical(n, row, col, obstacles) {
 	return total;
 }
 
-function upRightDiagonal(n, row, col, obstacles) {
+function upRightDiagonal(n, row, col, board) {
 	let total = 0;
 
 	let i = row + 1;
 	let j = col + 1;
 	for (; i <= n && j <= n;) {
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -101,13 +101,13 @@ function upRightDiagonal(n, row, col, obstacles) {
 	return total;
 }
 
-function downRightDiagonal(n, row, col, obstacles) {
+function downRightDiagonal(n, row, col, board) {
 	let total = 0;
 
 	let i = row - 1;
 	let j = col - 1;
 	for (; i > 0 && j > 0;) {			// down
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -118,13 +118,13 @@ function downRightDiagonal(n, row, col, obstacles) {
 	return total;
 }
 
-function upLeftDiagonal(n, row, col, obstacles) {
+function upLeftDiagonal(n, row, col, board) {
 	let total = 0;
 
 	let i = row + 1;
 	let j = col - 1;
 	for (; i <= n && j > 0;) {		// down
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -135,13 +135,13 @@ function upLeftDiagonal(n, row, col, obstacles) {
 	return total;
 }
 
-function downLeftDiagonal(n, row, col, obstacles) {
+function downLeftDiagonal(n, row, col, board) {
 	let total = 0;
 
 	let i = row - 1;
 	let j = col + 1;
 	for (; i > 0 && j <= n;) {
-		if (isObstacle(i, j, obstacles)) {
+		if (board[i][j]) {
 			break;
 		}
 		total++;
@@ -153,19 +153,22 @@ function downLeftDiagonal(n, row, col, obstacles) {
 }
 
 function createBoard(n, obstacles) {
-	const board = new Array(n);
-	for (let i = 0; i < n; i++) {
-		board[i] = new Array(n);
+	const board = new Array(n + 1);
+	for (let i = 0; i <= n; i++) {
+		board[i] = new Array(n + 1);
 	}
-	for (let i = 0; i < n; i++) {
-		for (let j = 0; j < n; j++) {
+	for (let i = 0; i <= n; i++) {
+		for (let j = 0; j <= n; j++) {
 			board[i][j] = false;
 		}
 	}
 	for (let i = 0; i < obstacles.length; i++) {
-		board[obstacles[i][0]][obstacles[i][1]] = true;
+		const row = obstacles[i][0];
+		const col = obstacles[i][1];
+		// console.error('row ', row, ' col ', col);
+		board[row][col] = true;
 	}
-	console.error('board ', board);
+	// console.error('board ', board);
 	return board;
 }
 
@@ -174,17 +177,17 @@ function queensAttack(n, k, row, col, obstacles) {
 
 	const board = createBoard(n, obstacles);
 
-	const horizLeft = leftHorizontal(n, row, col, obstacles);
-	const horizRight = rightHorizontal(n, row, col, obstacles);
+	const horizLeft = leftHorizontal(n, row, col, board);
+	const horizRight = rightHorizontal(n, row, col, board);
 
-	const verticalUp = upVertical(n, row, col, obstacles);
-	const verticalDown = downVertical(n, row, col, obstacles);
+	const verticalUp = upVertical(n, row, col, board);
+	const verticalDown = downVertical(n, row, col, board);
 
-	const leftDiagonalUp = upLeftDiagonal(n, row, col, obstacles);
-	const leftDiagonalDown = downLeftDiagonal(n, row, col, obstacles);
+	const leftDiagonalUp = upLeftDiagonal(n, row, col, board);
+	const leftDiagonalDown = downLeftDiagonal(n, row, col, board);
 
-	const rightDiagonalUp = upRightDiagonal(n, row, col, obstacles);
-	const rightDiagonalDown = downRightDiagonal(n, row, col, obstacles);
+	const rightDiagonalUp = upRightDiagonal(n, row, col, board);
+	const rightDiagonalDown = downRightDiagonal(n, row, col, board);
 
 	const total = horizLeft + horizRight + verticalUp + verticalDown +
 		leftDiagonalUp + leftDiagonalDown + rightDiagonalUp + rightDiagonalDown;
