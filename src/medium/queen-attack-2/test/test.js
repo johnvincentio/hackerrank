@@ -173,4 +173,23 @@ describe.only('test', () => {
 		const result = a.main(input);
 		result.should.equal(0);
 	});
+
+	it('3', () => {
+		const input = [
+			'8 0',
+			'4 4'
+		];
+		const result = a.main(input);
+		result.should.equal(27);
+	});
+
+	it('4', () => {
+		const input = [
+			'8 1',
+			'4 4',
+			'3 5'
+		];
+		const result = a.main(input);
+		result.should.equal(24);
+	});
 });
