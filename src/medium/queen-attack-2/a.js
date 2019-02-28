@@ -41,45 +41,46 @@ function queensAttack(size, row, col, obstacles) {
 }
 
 function calculateObstacles(obstacles, row, col, obstacleRow, obstacleCol) {
+	if (row === obstacleRow && col === obstacleCol) {		// ignore queen square
+		return;
+	}
+
 	const distanceRow = Math.abs(obstacleRow - row) - 1;
 	const distanceCol = Math.abs(obstacleCol - col) - 1;
 
-	if (col === obstacleCol) {
-		if (row < obstacleRow) {
-			obstacles.N = Math.min(obstacles.N, distanceRow);		// N
-		}
-		else {
-			obstacles.S = Math.min(obstacles.S, distanceRow);		// S
-		}
+	const higherRow = obstacleRow - row > 0;
+	const higherCol = obstacleCol - col > 0;
+
+	if (col === obstacleCol && higherRow) {
+		obstacles.N = Math.min(obstacles.N, distanceRow);		// N
 	}
-	else if (row === obstacleRow) {
-		if (col < obstacleCol) {
-			obstacles.E = Math.min(obstacles.E, distanceCol);		// E
-		}
-		else {
-			obstacles.W = Math.min(obstacles.W, distanceCol);		// W
-		}
+	if (col === obstacleCol && !higherRow) {
+		obstacles.S = Math.min(obstacles.S, distanceRow);		// S
 	}
-	else if (distanceRow !== distanceCol) {
-		;
+	if (row === obstacleRow && higherCol) {
+		obstacles.E = Math.min(obstacles.E, distanceCol);		// E
 	}
-	else if (row > obstacleRow) {
-		if (col > obstacleCol) {
-			obstacles.SE = Math.min(obstacles.SE, distanceRow);			// SE
-		}
-		else {
-			obstacles.SW = Math.min(obstacles.SW, distanceRow);			// SW
-		}
+	if (row === obstacleRow && !higherCol) {
+		obstacles.W = Math.min(obstacles.W, distanceCol);		// W
 	}
-	else if (row < obstacleRow) {
-		if (col > obstacleCol) {
-			obstacles.NE = Math.min(obstacles.NE, distanceRow);			// NE
-		}
-		else {
-			obstacles.NW = Math.min(obstacles.NW, distanceRow);			// NW
-		}
+
+
+	if (distanceRow !== distanceCol) {
+		return;
 	}
-	// console.error('calculateObstacles::obstacles ', obstacles);
+
+	if (higherRow && higherCol) {
+		obstacles.NE = Math.min(obstacles.NE, distanceRow);			// NE
+	}
+	if (!higherRow && higherCol) {
+		obstacles.SE = Math.min(obstacles.SE, distanceRow);			// SE
+	}
+	if (!higherRow && !higherCol) {
+		obstacles.SW = Math.min(obstacles.SW, distanceRow);			// SW
+	}
+	if (higherRow && !higherCol) {
+		obstacles.NW = Math.min(obstacles.NW, distanceRow);			// NW
+	}
 }
 
 function setup() {
