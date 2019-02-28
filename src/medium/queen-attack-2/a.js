@@ -15,7 +15,7 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-function isObstacle(row, col, obstacles) {
+function isObstacleOLD(row, col, obstacles) {
 	// console.error('isObstacle; row ', row, ' col ', col);
 	for (let i = 0; i < obstacles.length; i++) {
 		// console.error('i ', i, ' obstacle ', obstacles[i]);
@@ -24,6 +24,15 @@ function isObstacle(row, col, obstacles) {
 		}
 	}
 	return false;
+}
+
+function isObstacle(row, col, obstacles) {
+	// console.error('isObstacle; row ', row, ' col ', col);
+	const idx = obstacles.findIndex(item => {
+		return item[0] === row && item[1] === col;
+	});
+	// console.error('idx ', idx);
+	return idx > -1;
 }
 
 function leftHorizontal(n, row, col, obstacles) {

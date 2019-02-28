@@ -143,7 +143,7 @@ describe('downLeftDiagonal', () => {
 	});
 });
 
-describe.only('test', () => {
+describe('test', () => {
 	it('1', () => {
 		const input = [
 			'4 0',
