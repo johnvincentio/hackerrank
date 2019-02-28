@@ -12,13 +12,14 @@ const should = require('chai').should();
 
 const a = require('../a');
 
+const ide = false;	// true if using Visual Studio Code debugger
+const name = ide ? './src/medium/queen-attack-2/test/testcase-17/input.txt' :
+	'./test/testcase-17/input.txt';
+
 let inputString = null;
 
-describe.only('testcase-17', () => {
+describe('testcase-17', () => {
 	before(() => {
-		const name = './test/testcase-17/input17.txt';
-		// let name = './src/medium/queen-attack-2/test/testcase-17/input17.txt';
-		// const alpha = fs.readFileSync('./test/testcase-17/input17.txt').toString();
 		const alpha = fs.readFileSync(name).toString();
 		inputString = alpha
 			.trim()
