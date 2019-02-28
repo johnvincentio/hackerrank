@@ -89,7 +89,7 @@ describe('downVertical', () => {
 	});
 });
 
-describe.only('upLeftDiagonal', () => {
+describe('upLeftDiagonal', () => {
 	it('1', () => {
 		const obstacles = [[3, 3]
 		];
@@ -116,7 +116,34 @@ describe.only('upLeftDiagonal', () => {
 	});
 });
 
-describe('test', () => {
+describe('downLeftDiagonal', () => {
+	it('1', () => {
+		const obstacles = [[3, 3]
+		];
+		const result = a.downLeftDiagonal(5, 4, 2, obstacles);
+		result.should.equal(0);
+	});
+	it('2', () => {
+		const obstacles = [[2, 4]
+		];
+		const result = a.downLeftDiagonal(5, 4, 2, obstacles);
+		result.should.equal(1);
+	});
+	it('3', () => {
+		const obstacles = [[1, 5]
+		];
+		const result = a.downLeftDiagonal(5, 4, 2, obstacles);
+		result.should.equal(2);
+	});
+	it('4', () => {
+		const obstacles = [[1, 1]
+		];
+		const result = a.downLeftDiagonal(5, 4, 2, obstacles);
+		result.should.equal(3);
+	});
+});
+
+describe.only('test', () => {
 	it('1', () => {
 		const input = [
 			'4 0',

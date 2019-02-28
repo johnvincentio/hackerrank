@@ -7,8 +7,6 @@ Queens Attack 2
 
 /* eslint-disable no-plusplus */
 
-const convert = {};
-
 let inputString = '';
 let currentLine = 0;
 
@@ -18,15 +16,14 @@ function readLine() {
 }
 
 function isObstacle(row, col, obstacles) {
-	console.error('isObstacle; row ', row, ' col ', col);
-	let result = false;
+	// console.error('isObstacle; row ', row, ' col ', col);
 	for (let i = 0; i < obstacles.length; i++) {
-		console.error('i ', i, ' obstacle ', obstacles[i]);
+		// console.error('i ', i, ' obstacle ', obstacles[i]);
 		if (obstacles[i][0] === row && obstacles[i][1] === col) {
 			return true;
 		}
 	}
-	return result;
+	return false;
 }
 
 function leftHorizontal(n, row, col, obstacles) {
@@ -83,7 +80,7 @@ function upRightDiagonal(n, row, col, obstacles) {
 
 	let i = row + 1;
 	let j = col + 1;
-	for (; i < n && j < n;) {
+	for (; i <= n && j <= n;) {
 		if (isObstacle(i, j, obstacles)) {
 			break;
 		}
@@ -117,7 +114,7 @@ function upLeftDiagonal(n, row, col, obstacles) {
 
 	let i = row + 1;
 	let j = col - 1;
-	for (; i < n && j > 0;) {		// down
+	for (; i <= n && j > 0;) {		// down
 		if (isObstacle(i, j, obstacles)) {
 			break;
 		}
@@ -132,15 +129,15 @@ function upLeftDiagonal(n, row, col, obstacles) {
 function downLeftDiagonal(n, row, col, obstacles) {
 	let total = 0;
 
-	let i = row + 1;
-	let j = col - 1;
-	for (; i < n && j > 0;) {
+	let i = row - 1;
+	let j = col + 1;
+	for (; i > 0 && j <= n;) {
 		if (isObstacle(i, j, obstacles)) {
 			break;
 		}
 		total++;
-		i++;
-		j--;
+		i--;
+		j++;
 	}
 	console.error('downLeftDiagonal total ', total);
 	return total;
@@ -151,19 +148,15 @@ function queensAttack(n, k, row, col, obstacles) {
 
 	const horizLeft = leftHorizontal(n, row, col, obstacles);
 	const horizRight = rightHorizontal(n, row, col, obstacles);
-	console.error('horizLeft ', horizLeft, ' horizRight ', horizRight);
 
 	const verticalUp = upVertical(n, row, col, obstacles);
 	const verticalDown = downVertical(n, row, col, obstacles);
-	console.error('verticalUp ', verticalUp, ' verticalDown ', verticalDown);
 
 	const leftDiagonalUp = upLeftDiagonal(n, row, col, obstacles);
 	const leftDiagonalDown = downLeftDiagonal(n, row, col, obstacles);
-	console.error('leftDiagonalUp ', leftDiagonalUp, ' leftDiagonalDown ', leftDiagonalDown);
 
 	const rightDiagonalUp = upRightDiagonal(n, row, col, obstacles);
 	const rightDiagonalDown = downRightDiagonal(n, row, col, obstacles);
-	console.error('rightDiagonalUp ', rightDiagonalUp, ' rightDiagonalDown ', rightDiagonalDown);
 
 	const total = horizLeft + horizRight + verticalUp + verticalDown +
 		leftDiagonalUp + leftDiagonalDown + rightDiagonalUp + rightDiagonalDown;
