@@ -11,13 +11,13 @@
 			"program": "${workspaceFolder}/index.js"
 		},
 		{
-			"name": "service lane",
+			"name": "queen-attack-2",
 			"type": "node",
 			"request": "launch",
 			"program": "${workspaceRoot}/src/node_modules/mocha/bin/_mocha",
 			"stopOnEntry": false,
 			"args": [
-				"src/easy/service-lane/test/**/*.js",
+				"src/medium/queen-attack-2/test/**/*.js",
 				"--no-timeouts"
 			],
 			"cwd": "${workspaceRoot}",
