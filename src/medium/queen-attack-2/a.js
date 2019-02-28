@@ -1,8 +1,8 @@
 
 /*
-{Challenge URL}
+https://www.hackerrank.com/challenges/queens-attack-2/problem
 
-{Challenge name}
+Queens Attack 2
 */
 
 /* eslint-disable no-plusplus */
@@ -22,6 +22,9 @@ function isObstacle(row, col, obstacles) {
 	let result = false;
 	for (let i = 0; i < obstacles.length; i++) {
 		console.error('i ', i, ' obstacle ', obstacles[i]);
+		if (obstacles[i][0] === row && obstacles[i][1] === col) {
+			return true;
+		}
 	}
 	return result;
 }
@@ -169,7 +172,7 @@ function queensAttack(n, k, row, col, obstacles) {
 	return total;
 }
 
-convert.main = function main(input) {
+function main(input) {
 	currentLine = 0;
 	inputString = input;
 
@@ -191,4 +194,15 @@ convert.main = function main(input) {
 	return result;
 }
 
-module.exports = convert;
+module.exports = {
+	main,
+	leftHorizontal,
+	rightHorizontal,
+	upVertical,
+	downVertical,
+	upLeftDiagonal,
+	downLeftDiagonal,
+	upRightDiagonal,
+	downRightDiagonal
+};
+
