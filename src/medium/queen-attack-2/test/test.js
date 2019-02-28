@@ -6,7 +6,7 @@ const should = require('chai').should();
 const a = require('../a');
 
 describe('test', () => {
-	it.only('1', () => {
+	it('1', () => {
 		const input = [
 			'4 0',
 			'4 4'
@@ -15,7 +15,7 @@ describe('test', () => {
 		result.should.equal(9);
 	});
 
-	it('2', () => {
+	it.only('2', () => {
 		const input = [
 			'5 3',
 			'4 3',
