@@ -152,8 +152,27 @@ function downLeftDiagonal(n, row, col, obstacles) {
 	return total;
 }
 
+function createBoard(n, obstacles) {
+	const board = new Array(n);
+	for (let i = 0; i < n; i++) {
+		board[i] = new Array(n);
+	}
+	for (let i = 0; i < n; i++) {
+		for (let j = 0; j < n; j++) {
+			board[i][j] = false;
+		}
+	}
+	for (let i = 0; i < obstacles.length; i++) {
+		board[obstacles[i][0]][obstacles[i][1]] = true;
+	}
+	console.error('board ', board);
+	return board;
+}
+
 function queensAttack(n, k, row, col, obstacles) {
 	console.error('n ', n, ' k ', k, ' row ', row, ' col ', col, ' obstacles ', obstacles);
+
+	const board = createBoard(n, obstacles);
 
 	const horizLeft = leftHorizontal(n, row, col, obstacles);
 	const horizRight = rightHorizontal(n, row, col, obstacles);
@@ -205,6 +224,7 @@ module.exports = {
 	upLeftDiagonal,
 	downLeftDiagonal,
 	upRightDiagonal,
-	downRightDiagonal
+	downRightDiagonal,
+	createBoard
 };
 
