@@ -57,7 +57,7 @@ describe('test', () => {
 		result[0].should.equal('ba');
 	});
 
-	it.only('4', () => {
+	it('4', () => {
 		const input = [
 			'1',
 			'bb'
@@ -69,7 +69,7 @@ describe('test', () => {
 		result[0].should.equal('no answer');
 	});
 
-	it.only('5', () => {
+	it('5', () => {
 		const input = [
 			'1',
 			'dkhc'
@@ -80,7 +80,7 @@ describe('test', () => {
 		result[0].should.equal('hcdk');
 	});
 
-	it.only('6', () => {
+	it('6', () => {
 		const input = [
 			'1',
 			'dbha'
@@ -91,7 +91,7 @@ describe('test', () => {
 		result[0].should.equal('dhab');
 	});
 
-	it.only('7', () => {
+	it('7', () => {
 		const input = [
 			'1',
 			'hdef'
@@ -102,7 +102,7 @@ describe('test', () => {
 		result[0].should.equal('hdfe');
 	});
 
-	it.only('8', () => {
+	it('8', () => {
 		const input = [
 			'1',
 			'gkjepmf'
