@@ -26,5 +26,21 @@
 				"NODE_ENV": "testing"
 			}
 		},
+		{
+			"name": "bigger-is-greater",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/src/node_modules/mocha/bin/_mocha",
+			"stopOnEntry": false,
+			"args": [
+				"src/medium/bigger-is-greater/test/**/*.js",
+				"--no-timeouts"
+			],
+			"cwd": "${workspaceRoot}",
+			"runtimeExecutable": null,
+			"env": {
+				"NODE_ENV": "testing"
+			}
+		},
 	]
 }

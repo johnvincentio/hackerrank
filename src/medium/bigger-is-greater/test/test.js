@@ -6,7 +6,7 @@ const should = require('chai').should();
 const a = require('../a');
 
 describe('test', () => {
-	it.only('1', () => {
+	it('1', () => {
 		const input = [
 			'5',
 			'ab',
@@ -45,4 +45,72 @@ describe('test', () => {
 		result[4].should.equal('abdc');
 		result[5].should.equal('fedcbabdc');
 	});
+
+	it('3', () => {
+		const input = [
+			'1',
+			'ab'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('ba');
+	});
+
+	it.only('4', () => {
+		const input = [
+			'1',
+			'bb'
+		];
+		const result = a.main(input);
+		console.log('in 4; result ', result);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('no answer');
+	});
+
+	it.only('5', () => {
+		const input = [
+			'1',
+			'dkhc'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('hcdk');
+	});
+
+	it.only('6', () => {
+		const input = [
+			'1',
+			'dbha'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('dhab');
+	});
+
+	it.only('7', () => {
+		const input = [
+			'1',
+			'hdef'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('hdfe');
+	});
+
+	it.only('8', () => {
+		const input = [
+			'1',
+			'gkjepmf'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('gkjfemp');
+	});
+
 });
