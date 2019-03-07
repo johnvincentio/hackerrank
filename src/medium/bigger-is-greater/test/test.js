@@ -113,4 +113,15 @@ describe('test', () => {
 		result[0].should.equal('gkjfemp');
 	});
 
+	it('9', () => {
+		const input = [
+			'1',
+			'g'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('no answer');
+	});
+
 });
