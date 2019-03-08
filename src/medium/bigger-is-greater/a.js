@@ -11,11 +11,11 @@ let inputString = '';
 let currentLine = 0;
 
 function readLine() {
-	console.error('inputString[currentLine] ', inputString[currentLine]);
+	// console.error('inputString[currentLine] ', inputString[currentLine]);
 	return inputString[currentLine++];
 }
 
-function biggerIsGreater(w) {
+function biggerIsGreaterOLD(w) {
 	const arr = w.split('');
 	let currentPos = arr.length - 1;
 	while (currentPos > 0) {
@@ -38,6 +38,30 @@ function biggerIsGreater(w) {
 	return 'no answer';
 }
 
+function biggerIsGreater(w) {
+	const arr = w.split('');
+	const we = arr.length - 1;
+	let ws = we;
+	while (ws > 0) {
+		const comparePos = ws - 1;
+		const compareValue = arr[comparePos];
+		const jv = arr.slice(ws, we + 1).sort();
+		// console.log('jv ', jv);
+		for (let cnt = 0; cnt < jv.length; cnt++) {
+			if (jv[cnt] > compareValue) {
+				const tmp = jv[cnt];
+				jv[cnt] = compareValue;
+				arr[comparePos] = tmp;
+				const result = [...arr.slice(0, comparePos + 1), ...jv.sort()];
+				// console.log('result ', result);
+				return result.join('');
+			}
+		}
+		ws--;
+	}
+	return 'no answer';
+}
+
 function main(input) {
 	currentLine = 0;
 	inputString = input;
@@ -50,7 +74,7 @@ function main(input) {
 		const w = readLine();
 
 		const result = biggerIsGreater(w);
-		console.log(`result ${result}\n`);
+		// console.log(`result ${result}\n`);
 		arr.push(result);
 	}
 	return arr;

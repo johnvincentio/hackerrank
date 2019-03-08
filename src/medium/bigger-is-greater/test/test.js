@@ -124,4 +124,53 @@ describe('test', () => {
 		result[0].should.equal('no answer');
 	});
 
+	it('10', () => {
+		const input = [
+			'1',
+			'jqczvgqywydkunmjw'
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal('jqczvgqywydkunmwj');
+	});
+
+	it('11', () => {
+		const input = [
+			'1',
+			'ehdegnmorgafrjxvksc'
+		];
+		const answer = 'ehdegnmorgafrjxvsck';
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		// console.log('input[1]  ', input[1]);
+		// console.log('answer    ', answer);
+		// console.log('result[0] ', result[0]);
+		result[0].should.equal(answer);
+	});
+
+	it('12', () => {
+		const input = [
+			'1',
+			'wksc'
+		];
+		const answer = 'wsck';
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal(answer);
+	});
+
+	it('13', () => {
+		const input = [
+			'1',
+			'aksc'
+		];
+		const answer = 'asck';
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal(answer);
+	});
 });

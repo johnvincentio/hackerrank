@@ -45,7 +45,6 @@ describe('testcase-3', () => {
 		result.should.be.a('array');
 		result.length.should.equal(100);
 		result.length.should.equal(outputString.length);
-		// console.log('outputString.length ', outputString.length)
 		for (let cnt = 0; cnt < outputString.length; cnt++) {
 			result[cnt].should.equal(outputString[cnt]);
 		}
