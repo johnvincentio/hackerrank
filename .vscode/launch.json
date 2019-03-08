@@ -27,13 +27,13 @@
 			}
 		},
 		{
-			"name": "bigger-is-greater",
+			"name": "left-rotation",
 			"type": "node",
 			"request": "launch",
 			"program": "${workspaceRoot}/src/node_modules/mocha/bin/_mocha",
 			"stopOnEntry": false,
 			"args": [
-				"src/medium/bigger-is-greater/test/**/*.js",
+				"src/easy/left-rotation/test/**/*.js",
 				"--no-timeouts"
 			],
 			"cwd": "${workspaceRoot}",
