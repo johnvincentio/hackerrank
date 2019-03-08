@@ -5,7 +5,7 @@ const should = require('chai').should();
 const a = require('../a');
 
 describe('test', () => {
-	it.only('1', () => {
+	it('1', () => {
 		const input = [
 			'5 4',
 			'1 2 3 4 5'

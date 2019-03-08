@@ -19,20 +19,13 @@ function readLine() {
 
 // Complete the rotLeft function below.
 function rotLeft(a, d) {		// d is number of rotations
-	console.log('a ', a, ' d ', d);
 	const array = new Array(a.length);
-
-	const len = a.length;
-	// const mod = a.length % d;
-	const mod = d % a.length;
-	console.log('len ', len, ' mod ', mod);
-	for (let col = 0; col < len; col++) {
-		// const pos = ((mod + col) % len) + 1;
-		const pos = (col + mod + 1) % len;
-		console.log('pos ', pos, ' col ', col);
+	const leftMoves = d % a.length;
+	const rightMoves = a.length - leftMoves;
+	for (let col = 0; col < a.length; col++) {
+		const pos = col + rightMoves >= a.length ? col - leftMoves : col + rightMoves;
 		array[pos] = a[col];
 	}
-	// console.log('array ', array);
 	return array.join(' ');
 }
 
