@@ -20,7 +20,7 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-const all = [];
+let all = [];
 
 function next(currentNumber) {
 	// console.log('next; currentNumber ', currentNumber);
@@ -67,6 +67,7 @@ convert.main = function main(input) {
 	// prettier-ignore
 	const a = readLine().split(' ').map(aTemp => parseInt(aTemp, 10));
 	for (let i = 0; i < a.length; i++) {
+		all = [];
 		result.push(handleTest(a[i]) ? '1' : '0');
 	}
 
