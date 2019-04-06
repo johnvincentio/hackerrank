@@ -21,23 +21,30 @@ function readLine() {
 }
 
 function handleTest(line) {
-	// console.log('line ', line);
 	const parts = line.split(';');
-	// console.log('parts ', parts);
 
-	const URL1 = new URL(parts[0].trim());
-	const URL2 = new URL(parts[1].trim());
+	const URL1 = new URL(decodeURIComponent(new URL(parts[0].trim())));
+	const URL2 = new URL(decodeURIComponent(new URL(parts[1].trim())));
 	// console.log('URL1 ', URL1);
 	// console.log('URL2 ', URL2);
 
 	const port1 = URL1.port.trim().length === 0 ? '80' : URL1.port.trim();
 	const port2 = URL2.port.trim().length === 0 ? '80' : URL2.port.trim();
-	console.log('port1 ', port1, ' port2 ', port2);
+	// console.log('port1 ', port1, ' port2 ', port2);
 	if (port1 !== port2) {
 		return false;
 	}
 
 	if (URL1.protocol.toLowerCase() !== URL2.protocol.toLowerCase()) {
+		return false;
+	}
+
+	const path1 = URL1.pathname;
+	const path2 = URL2.pathname;
+	// console.log('path1 ', path1);
+	// console.log('path2 ', path2);
+
+	if (path1 !== path2) {
 		return false;
 	}
 
@@ -63,17 +70,3 @@ convert.main = function main(input) {
 };
 
 module.exports = convert;
-
-// function parser(url) {
-// 	const urlObj = new URL(url);
-// 	console.log('(1) urlObj ', urlObj);
-// 	console.log();
-// 	console.log('parts.port :', urlObj.port, ':');
-// 	console.log('parts.port.length ', urlObj.port.length);
-// 	if (urlObj.port === undefined || urlObj.port.length === 0) {
-// 		console.log('change port ');
-// 		urlObj.port = '80';
-// 	}
-// 	console.log('(2) urlObj ', urlObj);
-// 	return urlObj;
-// }

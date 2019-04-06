@@ -77,7 +77,21 @@ describe('test', () => {
 		result[0].should.equal(true);
 	});
 
-	it('11', () => {
+	it('6', () => {
+		const url1 = 'http://johnvincent.io';
+		const url2 = 'http://JOHNvincent.io/';
+		const str = `${url1};${url2}`;
+		const input = [
+			'1', // size of the array
+			str // integers a[i]
+		];
+		const result = a.main(input);
+		result.should.be.a('array');
+		result.length.should.equal(1);
+		result[0].should.equal(true);
+	});
+
+	it.only('11', () => {
 		const url1 = 'http://abc.com:80/~smith/home.html;http://ABC.com/%7Esmith/home.html';
 		const input = [
 			'1', // size of the array
@@ -89,7 +103,7 @@ describe('test', () => {
 		result[0].should.equal(true);
 	});
 
-	it('12', () => {
+	it.only('12', () => {
 		const url2 = 'HTTPS://abc.com:8080/path/index*!^(~|>`^|<{`{>.html;HTTP://EXAMPLE.com:8081//index{~.html';
 		const input = [
 			'1', // size of the array
