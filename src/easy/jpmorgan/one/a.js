@@ -44,7 +44,7 @@ function next(currentNumber) {
 
 function handleTest(a) {
 	let current = parseInt(a, 10);
-	for (let i = 0; i < 10000; i++) {
+	for (let i = 0; i < 1000000; i++) {
 		const j = next(current);
 		if (j === 0) {
 			return false;

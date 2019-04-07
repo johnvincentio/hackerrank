@@ -1,13 +1,5 @@
 //
 
-/*
-
-https://www.hackerrank.com/challenges/picking-numbers/problem?h_r=next-challenge&h_v=zen
-
-picking-numbers
-
-*/
-
 /* eslint-disable no-plusplus */
 
 const convert = {};
@@ -23,8 +15,8 @@ function readLine() {
 function handleTest(line) {
 	const parts = line.split(';');
 
-	const URL1 = new URL(decodeURIComponent(new URL(parts[0].trim())));
-	const URL2 = new URL(decodeURIComponent(new URL(parts[1].trim())));
+	const URL1 = new URL(decodeURIComponent(parts[0].trim()));
+	const URL2 = new URL(decodeURIComponent(parts[1].trim()));
 	// console.log('URL1 ', URL1);
 	// console.log('URL2 ', URL2);
 
@@ -39,12 +31,11 @@ function handleTest(line) {
 		return false;
 	}
 
-	const path1 = URL1.pathname;
-	const path2 = URL2.pathname;
-	// console.log('path1 ', path1);
-	// console.log('path2 ', path2);
+	if (URL1.hostname.toLowerCase() !== URL2.hostname.toLowerCase()) {
+		return false;
+	}
 
-	if (path1 !== path2) {
+	if (URL1.pathname !== URL2.pathname) {
 		return false;
 	}
 
