@@ -1,13 +1,5 @@
 //
 
-/*
-
-https://www.hackerrank.com/challenges/picking-numbers/problem?h_r=next-challenge&h_v=zen
-
-picking-numbers
-
-*/
-
 /* eslint-disable no-plusplus */
 
 const convert = {};
@@ -20,29 +12,29 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-let all = [];
-
-function next(currentNumber) {
-	// console.log('next; currentNumber ', currentNumber);
-	if (currentNumber === 1) {
-		return 1;
-	}
-	const str = currentNumber.toString();
-
-	let total = 0;
-	for (let i = 0; i < str.length; i++) {
-		total += str[i] ** 2;
-	}
-	console.log('next; currentNumber ', currentNumber, ' total ', total);
-
-	if (all.find(item => item === total)) {
-		return 0;
-	}
-	all.push(total);
-	return total;
-}
-
 function handleTest(a) {
+	const all = [];
+
+	function next(currentNumber) {
+		// console.log('next; currentNumber ', currentNumber);
+		if (currentNumber === 1) {
+			return 1;
+		}
+		const str = currentNumber.toString();
+
+		let total = 0;
+		for (let i = 0; i < str.length; i++) {
+			total += str[i] ** 2;
+		}
+		// console.log('next; currentNumber ', currentNumber, ' total ', total);
+
+		if (all.find(item => item === total)) {
+			return 0;
+		}
+		all.push(total);
+		return total;
+	}
+
 	let current = parseInt(a, 10);
 	for (let i = 0; i < 1000000; i++) {
 		const j = next(current);
@@ -68,7 +60,6 @@ convert.main = function main(input) {
 	// prettier-ignore
 	const a = readLine().split(' ').map(aTemp => parseInt(aTemp, 10));
 	for (let i = 0; i < a.length; i++) {
-		all = [];
 		result.push(handleTest(a[i]) ? '1' : '0');
 	}
 

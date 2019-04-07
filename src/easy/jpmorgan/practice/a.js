@@ -1,13 +1,5 @@
 //
 
-/*
-
-https://www.hackerrank.com/challenges/picking-numbers/problem?h_r=next-challenge&h_v=zen
-
-picking-numbers
-
-*/
-
 /* eslint-disable no-plusplus */
 
 process.stdin.resume();

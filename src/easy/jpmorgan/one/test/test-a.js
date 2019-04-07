@@ -4,7 +4,7 @@
 
 const should = require('chai').should();
 
-const a = require('../a');
+const a = require('../b');
 
 describe('test', () => {
 	it('1', () => {
