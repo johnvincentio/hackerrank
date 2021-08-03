@@ -15,6 +15,17 @@ function readLine() {
 
 function dynamicArray(n, queries) {
   console.log('>>> dynamicArray; n ', n, ' queries length ', queries.length);
+  console.log('queries ', queries);
+  let lastAnswer = 0;
+  let arr = Array(n);
+  for (let i = 0; i < n; i++) arr[i] = [];
+  for (let i = 0; i < queries.length; i++) {
+    const num = queries[i][n];
+    const rem = i % n;
+    console.log('i ', i, ' rem ', rem, ' num ', num);
+  }
+  console.log('arr ', arr);
+
   // Write your code here
 }
 
