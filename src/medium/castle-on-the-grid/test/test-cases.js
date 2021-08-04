@@ -1,7 +1,7 @@
 /* global describe, it, before */
 
 /*
-test case 10
+test cases
 */
 
 const fs = require('fs');
@@ -28,38 +28,32 @@ function getFileString(filename) {
 describe('testcase-10', () => {
   it('1', () => {
     let inputString = getFileString(createFileName(`input/input10.txt`));
-    let outputString = getFileString(
-      createFileName(`output/output10.txt`)
-    ).join('');
+    let outputString = getFileString(createFileName(`output/output10.txt`));
 
     const result = a.main(inputString);
     console.log('result :', result, ': outputString ', outputString);
-    // result.should.be.an('integer');
-    result.should.equal(1 * outputString);
+    result.should.equal(1 * outputString.join(''));
   });
 });
 
-/*
-const inputFilename = ide
-  ? './src/medium/castle-on-the-grid/test/input/input10.txt'
-  : './test/input/input10.txt';
-const outputFilename = ide
-  ? './src/medium/castle-on-the-grid/test/output/output10.txt'
-  : './test/output/output10.txt';
+describe('testcase-12', () => {
+  it('1', () => {
+    let inputString = getFileString(createFileName(`input/input12.txt`));
+    let outputString = getFileString(createFileName(`output/output12.txt`));
 
-let inputString = null;
-let outputString = null;
-
-  before(() => {
-    const alpha = fs.readFileSync(inputFilename).toString();
-    inputString = alpha
-      .trim()
-      .split('\n')
-      .map((str) => str.trim());
-    const beta = fs.readFileSync(outputFilename).toString();
-    outputString = beta
-      .trim()
-      .split('\n')
-      .map((str) => str.trim());
+    const result = a.main(inputString);
+    console.log('result :', result, ': outputString ', outputString);
+    result.should.equal(1 * outputString.join(''));
   });
-*/
+});
+
+describe('testcase-13', () => {
+  it('1', () => {
+    let inputString = getFileString(createFileName(`input/input13.txt`));
+    let outputString = getFileString(createFileName(`output/output13.txt`));
+
+    const result = a.main(inputString);
+    console.log('result :', result, ': outputString ', outputString);
+    result.should.equal(1 * outputString.join(''));
+  });
+});
