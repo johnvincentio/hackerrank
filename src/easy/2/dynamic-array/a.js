@@ -14,19 +14,31 @@ function readLine() {
 }
 
 function dynamicArray(n, queries) {
-  console.log('>>> dynamicArray; n ', n, ' queries length ', queries.length);
-  console.log('queries ', queries);
-  let lastAnswer = 0;
-  let arr = Array(n);
-  for (let i = 0; i < n; i++) arr[i] = [];
-  for (let i = 0; i < queries.length; i++) {
-    const num = queries[i][n];
-    const rem = i % n;
-    console.log('i ', i, ' rem ', rem, ' num ', num);
-  }
-  console.log('arr ', arr);
+  // console.log('>>> dynamicArray; n ', n, ' queries length ', queries.length);
+  // console.log('queries ', queries);
 
-  // Write your code here
+  let result = [];
+  let arr = Array(n);
+  let lastAnswer = 0;
+  for (let i = 0; i < n; i++) arr[i] = [];
+
+  for (let i = 0; i < queries.length; i++) {
+    const query = queries[i][0];
+    const x = queries[i][1];
+    const y = queries[i][2];
+    // console.log('query ', query, ' x ', x, ' y ', y);
+    let idx = (x ^ lastAnswer) % n;
+    // console.log('idx ', idx, ' lastAnswer ', lastAnswer);
+    if (query === 1) {
+      arr[idx].push(y);
+    } else if (query === 2) {
+      lastAnswer = arr[idx][y % arr[idx].length];
+      result.push(lastAnswer);
+    }
+  }
+  // console.log('arr ', arr);
+  // console.log('<<< dynamicArray; result ', result);
+  return result;
 }
 
 function main(input) {
