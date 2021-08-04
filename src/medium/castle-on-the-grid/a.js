@@ -31,7 +31,9 @@ function readLine() {
  */
 
 function minimumMoves(grid, startX, startY, goalX, goalY) {
-  // Write your code here
+  // prettier-ignore
+  console.log('>>> minimumMoves; grid ', grid, ' startX ', startX, ' startY ', startY, ' goalX ', goalX, ' goalY ', goalY);
+  return 3;
 }
 
 convert.main = function main(input) {
