@@ -5,10 +5,21 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "castle-on-the-grid",
 			"type": "node",
 			"request": "launch",
-			"name": "Launch Program",
-			"program": "${workspaceFolder}/index.js"
+			"program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+			"stopOnEntry": false,
+			"args": [
+				"src/medium/castle-on-the-grid/test/**/*.js",
+				"--no-timeouts"
+			],
+			"cwd": "${workspaceRoot}",
+			"runtimeExecutable": "/usr/local/bin/node",
+			"env": {
+				"NODE_ENV": "testing",
+				"DEBUG_MODE": "true"
+			}
 		},
 		{
 			"name": "queen-attack-2",
