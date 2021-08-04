@@ -49,34 +49,30 @@ function start(grid, startX, startY, goalX, goalY) {
 	console.log('(2) board ', board);
 	board[goalY][goalX] = GOAL;
 	console.log('(3) board ', board);
-
-
-
-	grid[goalY][goalX] = 'G';
-	console.log('grid ', grid);
-	// nextMove(1, startX, startY, grid);
-	// Debug.timing("Finished ("+x+","+y+")");
-	// Debug.flush();
+	nextMove(1, 0, startX, startY, board);
 }
 
-function nextMove(move, startX, startY, grid) {
+function nextMove(move, count, startX, startY, board) {
 	// prettier-ignore
-	console.log('>>> NextMove; move ', move, ' startX ', startX, ' startY ', startY, ' grid ', grid);
-	grid[startY][startX] = move;
-	console.log('grid ', grid);
-	grid[0] = 'erdg';
-	console.log('grid ', grid);
+	console.log('>>> NextMove; move ', move, ' count ', count, ' startX ', startX, ' startY ', startY, ' board ', board);
+	board[startY][startX] = move;
+	count++;
+	console.log('board ', board);
+
+	if (count > 3) return;
+
 	// if (move >= XYLIMIT)
 	// 	printBoard (board);
 	let newX; let newY;
-	// for (let i = 0; i < MAX_MOVE_TYPES; i++) {
-	// 	newX = x + Xinc[i];
-	// 	newY = y + Yinc[i];
-	// 	if (newX < 0 || newX >= XLIMIT) continue;
-	// 	if (newY < 0 || newY >= YLIMIT) continue;
-	// 	if (board[newX][newY] < 1) nextMove(move + 1, newX, newY, board);
-	// }
-	grid[startY][startX] = 0;
+	for (let i = 0; i < MAX_MOVE_TYPES; i++) {
+		newX = startX + XINC[i];
+		newY = startY + YINC[i];
+		if (newX < 0 || newX >= LIMIT || newY < 0 || newY >= LIMIT || board[newY][newX] === BLOCK) {
+			;
+		}
+		else nextMove(move + 1, count, newX, newY, board);
+	}
+	board[startY][startX] = 0;
 }
 
 /*
