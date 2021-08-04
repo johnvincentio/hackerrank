@@ -1,6 +1,5 @@
-
 /*
-https://www.hackerrank.com/challenges/ctci-array-left-rotation/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays&h_r=next-challenge&h_v=zen
+https://www.hackerrank.com/challenges/array-left-rotation/problem
 
 Left Rotation
 */
@@ -13,36 +12,43 @@ let inputString = '';
 let currentLine = 0;
 
 function readLine() {
-	// console.error('inputString[currentLine] ', inputString[currentLine]);
-	return inputString[currentLine++];
+  // console.error('inputString[currentLine] ', inputString[currentLine]);
+  return inputString[currentLine++];
 }
 
-// Complete the rotLeft function below.
-function rotLeft(a, d) {		// d is number of rotations
-	const array = new Array(a.length);
-	const leftMoves = d % a.length;
-	const rightMoves = a.length - leftMoves;
-	for (let col = 0; col < a.length; col++) {
-		const pos = col + rightMoves >= a.length ? col - leftMoves : col + rightMoves;
-		array[pos] = a[col];
-	}
-	return array.join(' ');
+// d is number of rotations
+function rotateLeft(d, arr) {
+  console.log('>>> rotateLeft; d ', d, ' arr ', arr);
+  const array = new Array(arr.length);
+  const leftMoves = d % arr.length;
+  const rightMoves = arr.length - leftMoves;
+  console.log('leftMoves ', leftMoves, ' rightMoves ', rightMoves);
+  for (let col = 0; col < arr.length; col++) {
+    const pos =
+      col + rightMoves >= arr.length ? col - leftMoves : col + rightMoves;
+    array[pos] = arr[col];
+  }
+  return array.join(' ');
 }
 
 convert.main = function main(input) {
-	currentLine = 0;
-	inputString = input;
+  currentLine = 0;
+  inputString = input;
 
-	/* insert from challenge */    const nd = readLine().split(' ');
+  /* insert from challenge */
 
-	const n = parseInt(nd[0], 10);
-	const d = parseInt(nd[1], 10);
-	const a = readLine().split(' ').map(aTemp => parseInt(aTemp, 10));
+  const nd = readLine().split(' ');
 
-	const result = rotLeft(a, d);
-	console.log(`result ${result}\n`);
-	return result;
-}
+  const n = parseInt(nd[0], 10);
+  const d = parseInt(nd[1], 10);
+  const arr = readLine()
+    .replace(/\s+$/g, '')
+    .split(' ')
+    .map((arrTemp) => parseInt(arrTemp, 10));
+
+  const result = rotateLeft(d, arr);
+  console.log(`result ${result}\n`);
+  return result;
+};
 
 module.exports = convert;
-
