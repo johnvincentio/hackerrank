@@ -25,7 +25,7 @@ function getFileString(filename) {
     .map((str) => str.trim());
 }
 
-describe('testcase-10', () => {
+describe.only('testcase-10', () => {
   it('1', () => {
     let inputString = getFileString(createFileName(`input/input10.txt`));
     let outputString = getFileString(createFileName(`output/output10.txt`));
