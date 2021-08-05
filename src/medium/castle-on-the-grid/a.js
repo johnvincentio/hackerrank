@@ -7,6 +7,7 @@ castle-on-the grid
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
+/* eslint-disable no-param-reassign */
 
 const convert = {};
 
@@ -14,11 +15,9 @@ let currentLine = 0;
 let inputString = '';
 
 function readLine() {
-	// console.error('inputString[currentLine] ', inputString[currentLine]);
 	return inputString[currentLine++];
 }
 
-let LIMIT = 0;
 const EMPTY = '.';
 const GOAL = 'G';
 const NO_MOVE = -1;
@@ -27,6 +26,7 @@ const XINC = [1, -1, 0, 0];
 const YINC = [0, 0, 1, -1];
 const MAX_MOVE_TYPES = 4;
 
+let LIMIT = 0;
 let MINIMUM_MOVES = 0;
 
 function printBoard(text, board, table) {
@@ -40,38 +40,16 @@ function printBoard(text, board, table) {
 	}
 }
 
-/*
-Grid:
-	'X' - blocked
-	'G' - the goal
-	'-' - empty
-	'number' - occupied by this move 'number'
-*/
-function start(grid, startX, startY, goalX, goalY) {
-	console.log('>>> start');
-	LIMIT = grid.length;
-	MINIMUM_MOVES = 32000;
-	const board = [...Array(LIMIT)].map(j=>Array(LIMIT).fill(EMPTY));
-	const table = Array(LIMIT*LIMIT).fill(NO_MOVE);
-	for (let x = 0; x < LIMIT; x++) {
-		board[x] = grid[x].split('');
-	}
-	board[goalX][goalY] = GOAL;
-	printBoard('Initial', board, table);
-	nextMove(1, 0, startX, startY, board, table);
-	console.log('<<< start');
-}
-
 function checkValid(x, y, board, moveType, previousType) {
 	if (x < 0 || x >= LIMIT || y < 0 || y >= LIMIT) return false;
-	if (board[x][y] === GOAL) return true;
-	if (board[x][y] !== EMPTY) return false;
+	if (board[x][y] === GOAL) return true;				// can move to GOAL square
+	if (board[x][y] !== EMPTY) return false;			// square must be otherwise EMPTY
 	if (previousType === 0) return true;					// was the initial move
 	if (moveType === previousType) return true;		// can keep moving in the same direction
-	if (previousType === 1 && moveType === 2) return false;
-	if (previousType === 2 && moveType === 1) return false;
-	if (previousType === 3 && moveType === 4) return false;
-	if (previousType === 4 && moveType === 3) return false;
+	if (previousType === 1 && moveType === 2) return false;		// cannot reverse
+	if (previousType === 2 && moveType === 1) return false;		// cannot reverse
+	if (previousType === 3 && moveType === 4) return false;		// cannot reverse
+	if (previousType === 4 && moveType === 3) return false;		// cannot reverse
 	return true;
 }
 
@@ -94,7 +72,7 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
 	console.log('>>> NextMove; move ', move, ' previousType ', previousType, ' previousX ', previousX, ' previousY ', previousY);
 	if (board[previousX][previousY] === GOAL) {
 		table[move - 1] = previousType;
-		printBoard('\n\nVICTORY', board, table);
+		printBoard('*** VICTORY ***', board, table);
 		const totalMoves = countMoves(table);
 		console.log('totalMoves ', totalMoves);
 		if (totalMoves < MINIMUM_MOVES) MINIMUM_MOVES = totalMoves;
@@ -129,11 +107,19 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
  *  4. INTEGER goalX
  *  5. INTEGER goalY
  */
-
 function minimumMoves(grid, startX, startY, goalX, goalY) {
 	// prettier-ignore
 	console.log('>>> minimumMoves; grid ', grid, ' startX ', startX, ' startY ', startY, ' goalX ', goalX, ' goalY ', goalY);
-	start(grid, startX, startY, goalX, goalY);
+	LIMIT = grid.length;
+	MINIMUM_MOVES = 32000;
+	const board = [...Array(LIMIT)].map(j=>Array(LIMIT).fill(EMPTY));
+	const table = Array(LIMIT * LIMIT).fill(NO_MOVE);
+	for (let x = 0; x < LIMIT; x++) {
+		board[x] = grid[x].split('');		// this format is easier to read
+	}
+	board[goalX][goalY] = GOAL;
+	printBoard('Initial', board, table);
+	nextMove(1, 0, startX, startY, board, table);
 	return MINIMUM_MOVES;
 }
 
