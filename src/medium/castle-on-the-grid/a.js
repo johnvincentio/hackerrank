@@ -20,7 +20,7 @@ function readLine() {
 
 const EMPTY = '.';
 const GOAL = 'G';
-const NO_MOVE = -1;
+const NO_MOVE = undefined;
 
 const XINC = [1, -1, 0, 0];
 const YINC = [0, 0, 1, -1];
@@ -36,7 +36,8 @@ function printBoard(text, board, table) {
 	}
 	console.log("");
 	for (let x = 0; x < LIMIT*LIMIT; x++) {
-		console.log('   table; row ', x, ' table ', table[x]);
+		if (table[x] !== undefined) 
+			console.log('   table; row ', x, ' table ', table[x]);
 	}
 }
 
@@ -58,7 +59,7 @@ function countMoves(table) {
 	let total = 0;
 	for (let i = 1; i < table.length; i++) {
 		console.log('i ', i, ' table ', table[i]);
-		if (table[i] === -1) break;
+		if (table[i] === -1 || table[i] === undefined) break;
 		if (table[i] !== lastMove) {
 			lastMove = table[i];
 			total++;
@@ -69,7 +70,7 @@ function countMoves(table) {
 
 function nextMove(move, previousType, previousX, previousY, board, table) {
 	// prettier-ignore
-	// console.log('>>> NextMove; move ', move, ' previousType ', previousType, ' previousX ', previousX, ' previousY ', previousY);
+	console.log('>>> NextMove; move ', move, ' previousType ', previousType, ' previousX ', previousX, ' previousY ', previousY);
 	if (board[previousX][previousY] === GOAL) {
 		table[move - 1] = previousType;
 		printBoard('*** VICTORY ***', board, table);
@@ -81,7 +82,7 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
 	}
 	board[previousX][previousY] = move;
 	table[move - 1] = previousType;
-	// printBoard('NextMove added move', board, table);
+	printBoard('NextMove added move', board, table);
 
 	let newX; let newY;
 	for (let moveType = 1; moveType <= MAX_MOVE_TYPES; moveType++) {
@@ -93,7 +94,7 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
 	}
 	board[previousX][previousY] = EMPTY;
 	table[move - 1] = NO_MOVE;
-	// printBoard('<<< NextMove; board', board, table);
+	printBoard('<<< NextMove; board', board, table);
 }
 
 /*
@@ -113,7 +114,8 @@ function minimumMoves(grid, startX, startY, goalX, goalY) {
 	LIMIT = grid.length;
 	MINIMUM_MOVES = 32000;
 	const board = [...Array(LIMIT)].map(j=>Array(LIMIT).fill(EMPTY));
-	const table = Array(LIMIT * LIMIT).fill(NO_MOVE);
+	// const table = Array(LIMIT * LIMIT).fill(NO_MOVE);
+	const table = [];
 	for (let x = 0; x < LIMIT; x++) {
 		board[x] = grid[x].split('');		// this format is easier to read
 	}
