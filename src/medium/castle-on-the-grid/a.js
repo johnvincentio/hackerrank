@@ -69,7 +69,7 @@ function countMoves(table) {
 
 function nextMove(move, previousType, previousX, previousY, board, table) {
 	// prettier-ignore
-	console.log('>>> NextMove; move ', move, ' previousType ', previousType, ' previousX ', previousX, ' previousY ', previousY);
+	// console.log('>>> NextMove; move ', move, ' previousType ', previousType, ' previousX ', previousX, ' previousY ', previousY);
 	if (board[previousX][previousY] === GOAL) {
 		table[move - 1] = previousType;
 		printBoard('*** VICTORY ***', board, table);
@@ -81,7 +81,7 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
 	}
 	board[previousX][previousY] = move;
 	table[move - 1] = previousType;
-	printBoard('NextMove added move', board, table);
+	// printBoard('NextMove added move', board, table);
 
 	let newX; let newY;
 	for (let moveType = 1; moveType <= MAX_MOVE_TYPES; moveType++) {
@@ -93,7 +93,7 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
 	}
 	board[previousX][previousY] = EMPTY;
 	table[move - 1] = NO_MOVE;
-	printBoard('<<< NextMove; board', board, table);
+	// printBoard('<<< NextMove; board', board, table);
 }
 
 /*

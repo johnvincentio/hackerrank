@@ -40,6 +40,17 @@ describe.only('testcase-10', () => {
 	});
 });
 
+describe('testcase-11', () => {
+	it('1', () => {
+		const inputString = getFileString(createFileName(`input/input11.txt`));
+		const outputString = getFileString(createFileName(`output/output11.txt`));
+
+		const result = a.main(inputString);
+		console.log('result :', result, ': outputString ', outputString);
+		result.should.equal(1 * outputString.join(''));
+	});
+});
+
 describe('testcase-12', () => {
 	it('1', () => {
 		const inputString = getFileString(createFileName(`input/input12.txt`));
