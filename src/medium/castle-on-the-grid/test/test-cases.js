@@ -29,7 +29,7 @@ function getFileString(filename) {
 		.map((str) => str.trim());
 }
 
-describe.only('testcase-10', () => {
+describe('testcase-10', () => {
 	it('1', () => {
 		const inputString = getFileString(createFileName(`input/input10.txt`));
 		const outputString = getFileString(createFileName(`output/output10.txt`));

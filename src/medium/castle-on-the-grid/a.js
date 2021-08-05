@@ -20,7 +20,6 @@ function readLine() {
 
 let LIMIT = 0;
 const EMPTY = '.';
-const BLOCK = 'X';
 const GOAL = 'G';
 const NO_MOVE = -1;
 
@@ -28,7 +27,7 @@ const XINC = [1, -1, 0, 0];
 const YINC = [0, 0, 1, -1];
 const MAX_MOVE_TYPES = 4;
 
-let MINIMUM_MOVES = 32000;
+let MINIMUM_MOVES = 0;
 
 function printBoard(text, board, table) {
 	console.log('   Print for ', text);
@@ -51,6 +50,7 @@ Grid:
 function start(grid, startX, startY, goalX, goalY) {
 	console.log('>>> start');
 	LIMIT = grid.length;
+	MINIMUM_MOVES = 32000;
 	const board = [...Array(LIMIT)].map(j=>Array(LIMIT).fill(EMPTY));
 	const table = Array(LIMIT*LIMIT).fill(NO_MOVE);
 	for (let x = 0; x < LIMIT; x++) {
@@ -99,7 +99,6 @@ function nextMove(move, previousType, previousX, previousY, board, table) {
 		console.log('totalMoves ', totalMoves);
 		if (totalMoves < MINIMUM_MOVES) MINIMUM_MOVES = totalMoves;
 		table[move - 1] = NO_MOVE;
-
 		return;
 	}
 	board[previousX][previousY] = move;
@@ -163,46 +162,3 @@ convert.main = function main(input) {
 };
 
 module.exports = convert;
-
-/*
-function start(grid, startX, startY, goalX, goalY) {
-	// int board[][] = new int[XLIMIT][YLIMIT];
-	// Debug.timing("Starting ("+x+","+y+")");
-	LIMIT = grid.length;
-
-	const board = [...Array(LIMIT)].map(x=>Array(LIMIT).fill(EMPTY));
-	console.log('(1) board ', board);
-	for (let y = 0; y < LIMIT; y++) {
-		for (let x = 0; x < LIMIT; x++) {
-			if (grid[y][x] === 'X') board[y][x] = BLOCK;
-		}
-	}
-	console.log('(2) board ', board);
-	board[goalY][goalX] = GOAL;
-	console.log('(3) board ', board);
-	nextMove(1, 0, startX, startY, board);
-}
-
-function nextMove(move, count, startX, startY, board) {
-	// prettier-ignore
-	console.log('>>> NextMove; move ', move, ' count ', count, ' startX ', startX, ' startY ', startY, ' board ', board);
-	board[startY][startX] = move;
-	count++;
-	console.log('board ', board);
-
-	if (count > 3) return;
-
-	// if (move >= XYLIMIT)
-	// 	printBoard (board);
-	let newX; let newY;
-	for (let i = 0; i < MAX_MOVE_TYPES; i++) {
-		newX = startX + XINC[i];
-		newY = startY + YINC[i];
-		if (newX < 0 || newX >= LIMIT || newY < 0 || newY >= LIMIT || board[newY][newX] === BLOCK) {
-			;
-		}
-		else nextMove(move + 1, count, newX, newY, board);
-	}
-	board[startY][startX] = 0;
-}
-*/
